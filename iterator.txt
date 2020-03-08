@@ -1,0 +1,51 @@
+package iterator;
+
+public interface Iterator {
+   public boolean hasNext();
+   public Object next();
+}
+interface Cse {
+   public Iterator getIterator();
+}
+
+class box implements Cse {
+   public String names[] = {"Akanksha" , "Ashritha" ,"Lahari" , "Karishma"};
+
+   @Override
+   public Iterator getIterator() {
+      return new NameIterator();
+   }
+
+   private class NameIterator implements Iterator {
+
+      int i;
+
+    
+      public boolean hasNext() {
+      
+         if(i < names.length){
+            return true;
+         }
+         return false;
+      }
+
+      public Object next() {
+      
+         if(this.hasNext()){
+            return names[i++];
+         }
+         return null;
+      }		
+   }
+}
+public class iteratormain {
+   
+	
+   public static void main(String[] args) {
+      box obj= new box();
+      for(Iterator iter = obj.getIterator(); iter.hasNext();){
+         String name = (String)iter.next();
+         System.out.println("Name : " + name);
+      } 	
+   }
+}

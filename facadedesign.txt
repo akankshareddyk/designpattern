@@ -1,0 +1,42 @@
+package facade;
+        interface Shape {
+   void draw();
+}
+ class Rectangle implements Shape {
+
+   @Override
+   public void draw() {
+      System.out.println("method of rectangle");
+   }
+}
+class Square implements Shape {
+
+   @Override
+   public void draw() {
+      System.out.println("method of Square");
+   }
+}
+ class Shaper {
+  
+   private Shape rectangle;
+   private Shape square;
+
+   public Shaper() {
+   
+      rectangle = new Rectangle();
+      square = new Square();
+   }
+   public void drawRectangle(){
+      rectangle.draw();
+   }
+   public void drawSquare(){
+      square.draw();
+   }
+}
+public class Facade{
+   public static void main(String[] args) {
+      Shaper object = new Shaper();
+      object.drawRectangle();
+      object.drawSquare();		
+   }
+}

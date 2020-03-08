@@ -1,0 +1,74 @@
+package command;
+
+import java.util.ArrayList;
+import java.util.List;
+
+ interface Order {
+   void execute();
+}
+class Stock {
+	
+   private String name = "Almondoil";
+   private int quantity = 10;
+
+   public void buy(){
+      System.out.println("Stock [ Name: "+name+" Quantity: " + quantity +" item which is  bought");
+   }
+   public void sell(){
+      System.out.println("Stock [ Name: "+name+", Quantity: " + quantity +" item which is  sold");
+   }
+}
+class BuyStock implements Order {
+   private Stock alomondStock;
+
+   public BuyStock(Stock alomondStock){
+      this.alomondStock = alomondStock;
+   }
+
+   public void execute() {
+      alomondStock.buy();
+   }
+}
+class SellStock implements Order {
+   private Stock alomondStock;
+
+   public SellStock(Stock alomondStock){
+      this.alomondStock = alomondStock;
+   }
+
+   public void execute() {
+      alomondStock.sell();
+   }
+}
+
+
+   class Shopkeeper{
+   private List<Order> orderList = new ArrayList<Order>(); 
+
+   public void takeOrder(Order order){
+      orderList.add(order);		
+   }
+
+   public void placeOrders(){
+   
+      for (Order order : orderList) {
+         order.execute();
+      }
+      orderList.clear();
+   }
+}
+package command;
+class NewClass{  
+public static void main(String[] args) {
+      Stock abcStock = new Stock();
+
+      BuyStock buyStockOrder = new BuyStock(abcStock);
+      SellStock sellStockOrder = new SellStock(abcStock);
+
+      Shopkeeper object = new Shopkeeper();
+     object.takeOrder(buyStockOrder);
+      object.takeOrder(sellStockOrder);
+
+      object.placeOrders();
+   }
+}
